@@ -1,3 +1,22 @@
+> **이 레포는 팀 프로젝트의 사본입니다.** 원본: [pecs0310/infertility_classification](https://github.com/pecs0310/infertility_classification) (3인 팀: 박소정 · 박지은 · 김영혜)
+>
+> 대회 데이터(`train.csv`, `test.csv`, 데이터 명세)와 제출 파일·모델 체크포인트는 재배포하지 않기 위해 커밋 기록에서 제외했습니다.
+
+## 🙋 내 작업 (김영혜) — [`feature/yunghye`](../../tree/feature/yunghye) 브랜치
+
+난임 시술 데이터로 **임신 성공 여부(ROC-AUC)** 를 예측하는 모델을 v1부터 v19까지 단계적으로 개선했습니다. 전 과정은 [최종 보고서](../../blob/feature/yunghye/report.md)와 버전별 실험 기록(`docs/experiment_history_v*.md`)에 정리되어 있습니다.
+
+| 단계 | 한 일 | 로컬 OOF AUC | 리더보드 |
+|---|---|---|---|
+| v1–v3 | 5-Fold CV 기반 LightGBM 베이스라인 → XGBoost·CatBoost 소프트보팅 | 0.73996 → 0.74031 | |
+| v4–v6 | 논문 기반 임상 피처, 처치 여부에 따른 결측(MNAR)과 단순 누락 분리·보간, 이상치 클리핑 | 0.74040 → 0.74042 | 0.74173 (3차 제출) |
+| v7 | LightGBM 메타 러너 스태킹 | 0.74125 | 0.74163 |
+| v11–v14 | ECDF 랭크 블렌딩, 피처 소거(Ablation), Nelder-Mead 가중치 최적화, 5-시드 배깅 | 0.74065 | 0.74156 |
+| v17 | 임상 단계 상태 인코딩 + ECDF Ridge 스태킹 | 0.74083 | **0.74214** |
+| v19 | MLP 규제 강화, Greedy 모델 선택, CatBoost Optuna 튜닝 | **0.74086** | 0.74209 |
+
+---
+
 # Infertility_classification_model
 
 ## Background
